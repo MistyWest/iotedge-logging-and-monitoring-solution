@@ -21,5 +21,5 @@ variable "iothub_name" {
 
 variable "send_metrics_device_to_cloud" {
   type    = bool
-  default = false
+  default = true
 }
