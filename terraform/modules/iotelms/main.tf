@@ -221,7 +221,7 @@ resource "azurerm_eventhub_authorization_rule" "elms" {
 
 resource "azurerm_iothub_endpoint_eventhub" "elms" {
   count               = var.send_metrics_device_to_cloud == true ? 1 : 0
-  resource_group_name = var.rg_name
+  resource_group_name = var.alt_rg
   iothub_name         = var.iothub_name
   name                = "metricscollector-${var.name_identifier}"
 
@@ -230,7 +230,7 @@ resource "azurerm_iothub_endpoint_eventhub" "elms" {
 
 resource "azurerm_iothub_route" "elms" {
   count               = var.send_metrics_device_to_cloud == true ? 1 : 0
-  resource_group_name = var.rg_name
+  resource_group_name = var.alt_rg
   iothub_name         = var.iothub_name
   name                = "metricscollector-${var.name_identifier}"
 
@@ -258,12 +258,12 @@ resource "azurerm_role_definition" "elms-iothub" {
   }
 
   assignable_scopes = [
-    "${data.azurerm_subscription.primary.id}/resourcegroups/${var.rg_name}/providers/Microsoft.Devices/IotHubs/${var.iothub_name}"
+    "${data.azurerm_subscription.primary.id}/resourcegroups/${var.alt_rg}/providers/Microsoft.Devices/IotHubs/${var.iothub_name}"
   ]
 }
 
 resource "azurerm_role_assignment" "elms-iothub" {
-  scope              = "${data.azurerm_subscription.primary.id}/resourcegroups/${var.rg_name}/providers/Microsoft.Devices/IotHubs/${var.iothub_name}"
+  scope              = "${data.azurerm_subscription.primary.id}/resourcegroups/${var.alt_rg}/providers/Microsoft.Devices/IotHubs/${var.iothub_name}"
   role_definition_id = azurerm_role_definition.elms-iothub.role_definition_resource_id
   principal_id       = azurerm_function_app.elms.identity.0.principal_id
   description        = "IoT Hub read and direct method invocation permissions for Function App"

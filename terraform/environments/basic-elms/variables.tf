@@ -4,9 +4,12 @@ variable "location" {
 
 variable "name_identifier" {
   type    = string
-  default = "elms"
+  default = "mh18"
 }
 
+variable "alt_rg" {
+  type = string
+}
 variable "rg_name" {
   type = string
 }

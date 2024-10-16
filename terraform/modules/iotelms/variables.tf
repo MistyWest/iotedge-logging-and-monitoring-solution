@@ -1,3 +1,6 @@
+variable "alt_rg" {
+  type = string
+}
 variable "rg_name" {
   type = string
 }
