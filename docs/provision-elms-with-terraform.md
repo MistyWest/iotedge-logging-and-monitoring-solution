@@ -92,7 +92,7 @@ This command has an impact on the pre-existent IoT Hub. It adds a new IoT Hub en
 
 ```shell
 cd terraform/environments/basic-elms
-terraform apply -var location="<location>" -var rg_name="<rg-name>" -var iothub_id="<iothub-resource-id>" -var iothub_name="<iothub-name>"
+terraform apply -var location="<location>" -var rg_name="<rg-name>" -var iothub_id="<iothub-resource-id>" -var iothub_name="<iothub-name>" -var alt_rg="<alternative, existing rg-name>"
 ```
 
 ### b. extended-elms
