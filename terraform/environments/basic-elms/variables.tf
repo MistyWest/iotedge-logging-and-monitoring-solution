@@ -4,7 +4,7 @@ variable "location" {
 
 variable "name_identifier" {
   type    = string
-  default = "mh18"
+  default = "yvr05"
 }
 
 variable "alt_rg" {
