@@ -119,6 +119,17 @@ resource "azurerm_windows_function_app" "elms" {
       allowed_origins = ["*"]
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      site_config[0].application_insights_connection_string,
+      site_config[0].application_insights_key,
+      app_settings["APPINSIGHTS_INSTRUMENTATIONKEY"],
+      app_settings["APPLICATIONINSIGHTS_CONNECTION_STRING"],
+      app_settings["HostKey"],
+      tags,
+    ]
+  }
 }
 
 data "azurerm_function_app_host_keys" "elms" {
